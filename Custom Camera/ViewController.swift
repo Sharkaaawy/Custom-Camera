@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     
-    
+    var image: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +66,9 @@ class ViewController: UIViewController {
         do{
             let captureDeviceInput = try AVCaptureDeviceInput(device: currentCamera!)
             captureSession.addInput(captureDeviceInput)
+            photoOutput = AVCapturePhotoOutput()
             photoOutput?.setPreparedPhotoSettingsArray([AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])], completionHandler: nil)
+            captureSession.addOutput(photoOutput!)
             
         }catch{
            print(error)
@@ -90,9 +92,26 @@ class ViewController: UIViewController {
     }
     
     @IBAction func cameraButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "showPhoto", sender: nil)
+        let settings = AVCapturePhotoSettings()
+        photoOutput?.capturePhoto(with: settings, delegate: self)
+        //performSegue(withIdentifier: "showPhoto", sender: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPhoto" {
+            let previewVC = segue.destination as! PreviewVC
+            previewVC.image = self.image
+        }
+    }
 
+}
+
+extension ViewController: AVCapturePhotoCaptureDelegate{
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        if let imageData = photo.fileDataRepresentation(){
+            image = UIImage(data: imageData)
+            performSegue(withIdentifier: "showPhoto", sender: nil)
+        }
+    }
 }
 

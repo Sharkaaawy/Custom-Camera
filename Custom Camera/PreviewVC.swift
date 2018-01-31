@@ -10,10 +10,14 @@ import UIKit
 
 class PreviewVC: UIViewController {
 
+    var image: UIImage!
+    
+    @IBOutlet weak var capturedImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        capturedImage.image = self.image
     }
 
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
