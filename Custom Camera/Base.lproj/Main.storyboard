@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,104 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Custom_Camera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-Is-86F">
+                                <rect key="frame" x="157" y="587" width="60" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="3bC-C3-aJs"/>
+                                    <constraint firstAttribute="width" constant="60" id="aAG-b4-Gee"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="cameraButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6ve-IW-idj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Ya1-Is-86F" secondAttribute="bottom" constant="20" id="0aP-bG-XXr"/>
+                            <constraint firstItem="Ya1-Is-86F" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="I92-Fw-mbr"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <segue destination="XfC-Tm-df9" kind="presentation" identifier="showPhoto" id="5vk-dA-4Ry"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--PreviewVC-->
+        <scene sceneID="uhe-w8-caf">
+            <objects>
+                <viewController id="XfC-Tm-df9" customClass="PreviewVC" customModule="Custom_Camera" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6MA-fA-1cx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gsk-Lt-hNC">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dax-tC-BpN">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDW-Vw-UEe">
+                                        <rect key="frame" x="8" y="22" width="48" height="30"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelButtonPressed:" destination="XfC-Tm-df9" eventType="touchUpInside" id="XQ2-cA-NlV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oi6-UA-LMr">
+                                        <rect key="frame" x="333" y="22" width="34" height="30"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveButtonPressed:" destination="XfC-Tm-df9" eventType="touchUpInside" id="zxn-Y5-GvU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="JDW-Vw-UEe" secondAttribute="bottom" constant="8" id="63B-jJ-5ha"/>
+                                    <constraint firstAttribute="bottom" secondItem="oi6-UA-LMr" secondAttribute="bottom" constant="8" id="8p3-Yh-6nD"/>
+                                    <constraint firstAttribute="trailing" secondItem="oi6-UA-LMr" secondAttribute="trailing" constant="8" id="Hhc-jk-tdL"/>
+                                    <constraint firstAttribute="height" constant="60" id="Ph5-1P-Hb8"/>
+                                    <constraint firstItem="oi6-UA-LMr" firstAttribute="top" secondItem="dax-tC-BpN" secondAttribute="top" constant="22" id="RbX-jb-pgC"/>
+                                    <constraint firstItem="JDW-Vw-UEe" firstAttribute="top" secondItem="dax-tC-BpN" secondAttribute="top" constant="22" id="W53-yH-FeO"/>
+                                    <constraint firstItem="JDW-Vw-UEe" firstAttribute="leading" secondItem="dax-tC-BpN" secondAttribute="leading" constant="8" id="Wjs-l0-iKX"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dax-tC-BpN" firstAttribute="top" secondItem="pqQ-Ds-bjG" secondAttribute="top" constant="-20" id="1qF-13-DC9"/>
+                            <constraint firstAttribute="trailing" secondItem="gsk-Lt-hNC" secondAttribute="trailing" id="9NG-fT-0rU"/>
+                            <constraint firstAttribute="bottom" secondItem="gsk-Lt-hNC" secondAttribute="bottom" id="H6h-XL-BDd"/>
+                            <constraint firstItem="gsk-Lt-hNC" firstAttribute="top" secondItem="6MA-fA-1cx" secondAttribute="top" id="KfT-dK-2dD"/>
+                            <constraint firstItem="dax-tC-BpN" firstAttribute="leading" secondItem="6MA-fA-1cx" secondAttribute="leading" id="L0V-qf-qlE"/>
+                            <constraint firstAttribute="trailing" secondItem="dax-tC-BpN" secondAttribute="trailing" id="ldX-Vj-vld"/>
+                            <constraint firstItem="gsk-Lt-hNC" firstAttribute="leading" secondItem="6MA-fA-1cx" secondAttribute="leading" id="wpK-FA-dAg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pqQ-Ds-bjG"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="77p-UA-US8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="758" y="32"/>
         </scene>
     </scenes>
 </document>
